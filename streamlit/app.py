@@ -11,7 +11,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Configuração da página
-st.set_page_config(page_title="Sistema de Recomendação de Talentos", layout="wide")
+st.set_page_config(
+    page_title="Sistema de Recomendação de Talentos"
+    , page_icon=":bookmark_tabs:"
+    , layout="wide")
 st.title("Dashboard de Matching entre Vagas e Candidatos")
 st.subheader("Selecione uma vaga na aba lateral para visualizar os candidatos mais compatíveis")
 
