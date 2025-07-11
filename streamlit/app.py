@@ -14,9 +14,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 st.set_page_config(
     page_title="Sistema de Recomendação de Talentos"
     , page_icon=":bookmark_tabs:"
-    , layout="wide")
-st.title("Dashboard de Matching entre Vagas e Candidatos")
-st.subheader("Selecione uma vaga na aba lateral para visualizar os candidatos mais compatíveis")
+    , layout="wide"
+)
+st.title("\U0001F4D1 Dashboard de Matching entre Vagas e Candidatos")
+st.subheader("\U0001F50E Selecione uma vaga na aba lateral para visualizar os candidatos mais compatíveis")
 
 # Carregamento dos dados JSON (apenas se ainda não estiverem na sessão)
 if 'df_Vagas' not in st.session_state or 'df_Applicants' not in st.session_state:
@@ -76,6 +77,9 @@ df_Vagas['informacoes_basicas__data_requicisao'] = pd.to_datetime(
 df_Vagas['mes_ano'] = df_Vagas['informacoes_basicas__data_requicisao'].dt.strftime('%b.%Y')
 
 # Filtros
+st.sidebar.image("post_fiap.png"
+        , caption="Pós-Tech FIAP | Tech Challenge Fase 4 | Grupo 5"
+        , width=220)
 st.sidebar.header("Filtros")
 meses_disponiveis = sorted(df_Vagas['mes_ano'].dropna().unique(), key=lambda x: pd.to_datetime(x, format='%b.%Y'))
 mes_selecionado = st.sidebar.selectbox("Selecione o mês:", meses_disponiveis)
@@ -109,4 +113,4 @@ top_candidatos = df_Applicants.sort_values(by='match_score', ascending=False).he
 
 # 📊 Exibição final
 st.markdown(f"### Top 10 Candidatos para a vaga: {vaga_selecionada}")
-st.dataframe(top_candidatos[['nome', 'match_score', 'cv_pt']], use_container_width=True)
+st.dataframe(top_candidatos[['informacoes_pessoais__nome', 'match_score', 'cv_pt']], use_container_width=True)
